@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class Mapa extends javax.swing.JPanel {
 
     private Image map;
+    private String mapPath = "/Assets/map.png";
     
     public Mapa() {
         //initComponents();
@@ -25,19 +26,23 @@ public class Mapa extends javax.swing.JPanel {
     }
     
     private void inicializarMapa(){
-        ImageIcon ii = new ImageIcon("map.png");        
-        map = ii.getImage();
-        int w = 480;
-        int h = 410;
+        
+        carregarMapa();               
+        int w = map.getWidth(this);
+        int h = map.getHeight(this);
         setPreferredSize(new Dimension(w,h));
         
+    }
+    
+    private void carregarMapa(){
+        ImageIcon ii = new ImageIcon(this.getClass().getResource(mapPath));
+        map = ii.getImage();
     }
     
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(map, 0, 0, null);
-    }
-   
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -20,7 +20,7 @@ public class Bomberman extends javax.swing.JFrame {
      */
     public Bomberman() {
         //initComponents();
-        criarMapa();        
+        criarMapa();
     }
     
     private void criarMapa(){
@@ -86,11 +86,12 @@ public class Bomberman extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {                
                 new Bomberman().setVisible(true);
+                
             }
         });
     }
 
-    /*private class TAdapter extends KeyAdapter {
+    private class TAdapter extends KeyAdapter {
         
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
@@ -112,7 +113,7 @@ public class Bomberman extends javax.swing.JFrame {
                     break;
             }
         }
-    }*/
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
