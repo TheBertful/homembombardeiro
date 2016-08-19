@@ -29,7 +29,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     private String mapPath = "/Assets/map.png";
     private Jogador player1;
     private Timer timer;
-    private final int DELAY = 100;
+    private final int DELAY = 1;
     
     public Mapa() {
         //initComponents();
@@ -60,8 +60,8 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(map, 0, 0, null);
         
+        g.drawImage(map, 0, 0, null);    
         doDrawing(g);
         Toolkit.getDefaultToolkit().sync();
     }   
@@ -90,6 +90,12 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,6 +107,10 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+       
+    }//GEN-LAST:event_formKeyPressed
 
     private class TAdapter extends KeyAdapter {
 

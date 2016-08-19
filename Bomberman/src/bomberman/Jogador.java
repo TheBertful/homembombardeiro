@@ -50,6 +50,14 @@ public class Jogador {
         return y;
     }
     
+    public void setX(int x) {
+        this.x = x;
+    }
+    
+    public int getDx() {
+        return dx;
+    }
+    
     public Image getImage() {
         return boneco;
     }
@@ -60,6 +68,7 @@ public class Jogador {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -30;
+            x = 10;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
@@ -75,7 +84,7 @@ public class Jogador {
         }
         
     }
-
+     
     public void keyReleased(KeyEvent e) {
         
         int key = e.getKeyCode();
