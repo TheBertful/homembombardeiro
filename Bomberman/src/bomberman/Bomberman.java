@@ -5,8 +5,6 @@
  */
 package bomberman;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 /**
@@ -14,7 +12,7 @@ import javax.swing.JFrame;
  * @author Administrador
  */
 public class Bomberman extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Bomberman
      */
@@ -28,6 +26,8 @@ public class Bomberman extends javax.swing.JFrame {
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setFocusable(true);
+        
     }
 
     /**
@@ -89,31 +89,9 @@ public class Bomberman extends javax.swing.JFrame {
                 
             }
         });
+    
     }
-
-    private class TAdapter extends KeyAdapter {
-        
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            
-            switch(key) {
-                case KeyEvent.VK_LEFT:
-                    break;
-                    
-                case KeyEvent.VK_UP:
-                    break;
-                    
-                case KeyEvent.VK_RIGHT:
-                    break;
-                    
-                case KeyEvent.VK_DOWN:
-                    break;
-                    
-                case KeyEvent.VK_SPACE:
-                    break;
-            }
-        }
-    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

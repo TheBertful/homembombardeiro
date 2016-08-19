@@ -5,20 +5,31 @@
  */
 package bomberman;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
  * @author Administrador
  */
-public class Mapa extends javax.swing.JPanel {
+public class Mapa extends javax.swing.JPanel implements ActionListener {
 
     private Image map;
     private String mapPath = "/Assets/map.png";
+    private Jogador player1;
+    private Timer timer;
+    private final int DELAY = 1;
     
     public Mapa() {
         //initComponents();
@@ -27,23 +38,49 @@ public class Mapa extends javax.swing.JPanel {
     
     private void inicializarMapa(){
         
+        addKeyListener(new TAdapter());
+        setFocusable(true);
+        
         carregarMapa();               
         int w = map.getWidth(this);
         int h = map.getHeight(this);
         setPreferredSize(new Dimension(w,h));
         
+        player1 = new Jogador();
+        
+        timer = new Timer(DELAY, this);
+        timer.start();
     }
     
     private void carregarMapa(){
         ImageIcon ii = new ImageIcon(this.getClass().getResource(mapPath));
         map = ii.getImage();
+      
     }
     
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(map, 0, 0, null);
+        
+        g.drawImage(map, 0, 0, null);    
+        doDrawing(g);
+        Toolkit.getDefaultToolkit().sync();
     }   
 
+     private void doDrawing(Graphics g) {
+        
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(player1.getImage(), player1.getX(), player1.getY(), this);        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        player1.move();
+        System.out.println(player1.getX() + " " + player1.getY());
+        repaint();  
+    }
+
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +89,12 @@ public class Mapa extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,7 +108,24 @@ public class Mapa extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+       
+    }//GEN-LAST:event_formKeyPressed
 
+    private class TAdapter extends KeyAdapter {
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            player1.keyReleased(e);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            player1.keyPressed(e);
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
