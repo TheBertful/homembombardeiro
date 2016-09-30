@@ -18,7 +18,7 @@ public class Bomb {
     private String bombPath = "/Assets/bomba.png";
     private int x;
     private int y;
-    private int pavil;
+    private int pavio = 1500;
     
     public Bomb(int x, int y) {
         this.x = x;
@@ -39,12 +39,12 @@ public class Bomb {
         return y;
     }
 
-    public int getPavil() {
-        return pavil;
+    public int getPavio() {
+        return pavio;
     }
 
-    public void setPavil(int pavil) {
-        this.pavil = pavil;
+    public void setPavio(int pavio) {
+        this.pavio = pavio;
     }
     
     public Image getImage() {

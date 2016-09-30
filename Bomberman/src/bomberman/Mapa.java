@@ -74,6 +74,11 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
         if(!player1.getBombas().isEmpty()) {
             for (int i = 0; i < player1.getBombas().size(); i++) {
                 g2d.drawImage(player1.getBombas().get(i).getImage(), player1.getBombas().get(i).getX(), player1.getBombas().get(i).getY(), this);
+                player1.getBombas().get(i).setPavio(player1.getBombas().get(i).getPavio() - 1);
+                if (player1.getBombas().get(i).getPavio() < 0) {
+                    player1.getBombas().remove(i);
+                    player1.setBombasEmCampo(player1.getBombasEmCampo() - 1);
+                }
             }
         }
     }

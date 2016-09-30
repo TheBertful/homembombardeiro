@@ -22,7 +22,10 @@ public class Jogador {
     private String bonecoPath = "/Assets/jovem.png";
     private int x;
     private int y;
+    private int limiteBombas = 3;
+    private int bombasEmCampo = 0;
     private ArrayList<Bomb> bombas;
+    
  
     public Jogador() {
         inicializarJogador();
@@ -31,7 +34,7 @@ public class Jogador {
     private void inicializarJogador() {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(bonecoPath));
         boneco = ii.getImage();
-        x = 30;
+        x = 40;
         y = 30;
         bombas = new ArrayList<Bomb>(); 
         // a ideia aqui é fazer algum construtor que receba o numero do player, pra ter um sprite diferente
@@ -58,28 +61,40 @@ public class Jogador {
         return bombas;
     }
     
+    public int getBombasEmCampo() {
+        return bombasEmCampo;
+    }
+    
+    public void setBombasEmCampo(int bombasEmCampo) {
+        this.bombasEmCampo = bombasEmCampo;
+    }
+    
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-           x = x-10;
+           x = x-32;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            x = x+10;
+            x = x+32;
         }
 
         if (key == KeyEvent.VK_UP) {
-            y = y-10;
+            y = y-32;
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            y = y+10;
+            y = y+32;
         }
         
         if (key == KeyEvent.VK_SPACE) {
-            bombas.add(new Bomb(x, y));
+            if (bombasEmCampo < limiteBombas) {
+                bombas.add(new Bomb(x, y));
+                bombasEmCampo++;
+            }
+            
         }
         
     }
