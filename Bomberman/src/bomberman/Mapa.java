@@ -70,7 +70,12 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
      private void doDrawing(Graphics g) {
         
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(player1.getImage(), player1.getX(), player1.getY(), this);        
+        g2d.drawImage(player1.getImage(), player1.getX(), player1.getY(), this);    
+        if(!player1.getBombas().isEmpty()) {
+            for (int i = 0; i < player1.getBombas().size(); i++) {
+                g2d.drawImage(player1.getBombas().get(i).getImage(), player1.getBombas().get(i).getX(), player1.getBombas().get(i).getY(), this);
+            }
+        }
     }
 
     @Override

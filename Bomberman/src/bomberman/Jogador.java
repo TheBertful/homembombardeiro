@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -21,6 +22,7 @@ public class Jogador {
     private String bonecoPath = "/Assets/jovem.png";
     private int x;
     private int y;
+    private ArrayList<Bomb> bombas;
  
     public Jogador() {
         inicializarJogador();
@@ -31,6 +33,7 @@ public class Jogador {
         boneco = ii.getImage();
         x = 30;
         y = 30;
+        bombas = new ArrayList<Bomb>(); 
         // a ideia aqui é fazer algum construtor que receba o numero do player, pra ter um sprite diferente
         // e s posição diferente pra cada um
     }
@@ -51,24 +54,32 @@ public class Jogador {
         return boneco;
     }
     
+    public ArrayList<Bomb> getBombas() {
+        return bombas;
+    }
+    
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-           x = x-30;
+           x = x-10;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            x = x+30;
+            x = x+10;
         }
 
         if (key == KeyEvent.VK_UP) {
-            y = y-30;
+            y = y-10;
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            y = y+30;
+            y = y+10;
+        }
+        
+        if (key == KeyEvent.VK_SPACE) {
+            bombas.add(new Bomb(x, y));
         }
         
     }
