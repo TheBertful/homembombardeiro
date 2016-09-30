@@ -21,9 +21,7 @@ public class Jogador {
     private String bonecoPath = "/Assets/jovem.png";
     private int x;
     private int y;
-    private int dx;
-    private int dy;
-
+ 
     public Jogador() {
         inicializarJogador();
     }
@@ -35,11 +33,6 @@ public class Jogador {
         y = 30;
         // a ideia aqui é fazer algum construtor que receba o numero do player, pra ter um sprite diferente
         // e s posição diferente pra cada um
-    }
-
-    public void move() {
-        x += dx;
-        y += dy;
     }
 
     public int getX() {
@@ -54,55 +47,30 @@ public class Jogador {
         this.x = x;
     }
     
-    public int getDx() {
-        return dx;
-    }
-    
     public Image getImage() {
         return boneco;
     }
     
-     public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-            dx = -30;
-            x = 10;
+           x = x-30;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            dx = 30;
+            x = x+30;
         }
 
         if (key == KeyEvent.VK_UP) {
-            dy = -30;
+            y = y-30;
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            dy = 30;
+            y = y+30;
         }
         
     }
      
-    public void keyReleased(KeyEvent e) {
-        
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-            dx = 0;
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 0;
-        }
-
-        if (key == KeyEvent.VK_UP) {
-            dy = 0;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
-        }
-    }
 }

@@ -40,6 +40,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
         
         addKeyListener(new TAdapter());
         setFocusable(true);
+        this.requestFocus();
         
         carregarMapa();               
         int w = map.getWidth(this);
@@ -75,8 +76,9 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        player1.move();
+        //player1.move();
         System.out.println(player1.getX() + " " + player1.getY());
+        this.requestFocus();
         repaint();  
     }
 
@@ -113,11 +115,6 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     }//GEN-LAST:event_formKeyPressed
 
     private class TAdapter extends KeyAdapter {
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            player1.keyReleased(e);
-        }
 
         @Override
         public void keyPressed(KeyEvent e) {
