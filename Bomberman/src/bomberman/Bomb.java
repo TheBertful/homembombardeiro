@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class Bomb {
  
     private Image bomb;
-    private String bombPath = "/Assets/jovem.png";
+    private String bombPath = "/Assets/bomba.png";
     private int x;
     private int y;
     private int pavil;
