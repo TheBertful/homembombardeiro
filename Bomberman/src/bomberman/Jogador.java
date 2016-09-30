@@ -8,6 +8,7 @@ package bomberman;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -25,7 +26,7 @@ public class Jogador {
     private int limiteBombas = 3;
     private int bombasEmCampo = 0;
     private ArrayList<Bomb> bombas;
-    
+    private Rectangle hitbox;
  
     public Jogador() {
         inicializarJogador();
@@ -67,6 +68,14 @@ public class Jogador {
     
     public void setBombasEmCampo(int bombasEmCampo) {
         this.bombasEmCampo = bombasEmCampo;
+    }
+    
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+   
+    public void setHitbox(int p1, int p2, int largura, int altura) {
+        hitbox = new Rectangle(p1, p2, largura, altura);
     }
     
     public void keyPressed(KeyEvent e) {

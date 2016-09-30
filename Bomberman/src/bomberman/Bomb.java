@@ -6,6 +6,7 @@
 package bomberman;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,10 +16,11 @@ import javax.swing.ImageIcon;
 public class Bomb {
  
     private Image bomb;
-    private String bombPath = "/Assets/bomba.png";
+    private String bombPath = "/Assets/bomb1.png";
     private int x;
     private int y;
     private int pavio = 1500;
+    private Rectangle hitbox;
     
     public Bomb(int x, int y) {
         this.x = x;
@@ -29,6 +31,7 @@ public class Bomb {
     private void inicializarBomba() {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(bombPath));
         bomb = ii.getImage();
+        hitbox = new Rectangle(x, y, ii.getIconWidth(), ii.getIconHeight());
     }
     
     public int getX() {
@@ -49,5 +52,9 @@ public class Bomb {
     
     public Image getImage() {
         return bomb;
+    }
+    
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 }
