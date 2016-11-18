@@ -16,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -30,50 +31,53 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     private Jogador player1;
     private Timer timer;
     private final int DELAY = 1;
-    
+    private ArrayList<Explosion> explosoes = new ArrayList<Explosion>();
+
     public Mapa() {
         //initComponents();
         inicializarMapa();
     }
-    
-    private void inicializarMapa(){
-        
+
+    private void inicializarMapa() {
+
         addKeyListener(new TAdapter());
         setFocusable(true);
         this.requestFocus();
-        
-        carregarMapa();               
+
+        carregarMapa();
         int w = map.getWidth(this);
         int h = map.getHeight(this);
-        setPreferredSize(new Dimension(w,h));
-        
+        setPreferredSize(new Dimension(w, h));
+
         player1 = new Jogador();
-        
+
         timer = new Timer(DELAY, this);
         timer.start();
     }
-    
-    private void carregarMapa(){
+
+    private void carregarMapa() {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(mapPath));
         map = ii.getImage();
-      
+
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
-        
-        g.drawImage(map, 0, 0, null);    
+
+        g.drawImage(map, 0, 0, null);
         doDrawing(g);
         Toolkit.getDefaultToolkit().sync();
-    }   
+    }
 
-     private void doDrawing(Graphics g) {
-        
+    private void doDrawing(Graphics g) {
+
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(player1.getImage(), player1.getX(), player1.getY(), this);  
-        player1.setHitbox(player1.getX(), player1.getY(), 19, 26);
-        
-        if(!player1.getBombas().isEmpty()) {
+        if (player1.isVivo()) {
+            g2d.drawImage(player1.getImage(), player1.getX(), player1.getY(), this);
+            player1.setHitbox(player1.getX(), player1.getY(), 19, 26);
+        }
+
+        if (!player1.getBombas().isEmpty()) {
             for (int i = 0; i < player1.getBombas().size(); i++) {
                 Bomb bomba;
                 bomba = player1.getBombas().get(i);
@@ -81,25 +85,45 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
                 bomba.setPavio(bomba.getPavio() - 1);
                 if (bomba.getPavio() < 0) {
                     player1.getBombas().remove(i);
-                    for (int j = 0; j < player1.getRange(); j++) {
-                        
+                    explosoes.add(new Explosion(bomba.getX(), bomba.getY()));
+                    for (int j = 1; j < player1.getRange() + 1; j++) {
+                        explosoes.add(new Explosion(bomba.getX() - (32 * j), bomba.getY()));
+                        explosoes.add(new Explosion(bomba.getX() + (32 * j), bomba.getY()));
+                        explosoes.add(new Explosion(bomba.getX(), bomba.getY() - (32 * j)));
+                        explosoes.add(new Explosion(bomba.getX(), bomba.getY() + (32 * j)));
                     }
                     player1.setBombasEmCampo(player1.getBombasEmCampo() - 1);
                 }
             }
         }
+
+        if (!explosoes.isEmpty()) {
+            for (int i = 0; i < explosoes.size(); i++) {
+                Explosion explosion;
+                explosion = explosoes.get(i);
+                g2d.drawImage(explosion.getImage(), explosion.getX(), explosion.getY(), this);
+                explosion.setLifetime(explosion.getLifetime() - 1);
+                if (explosion.getLifetime() < 0) {
+                    explosoes.remove(i);
+                }
+
+                if (explosion.getHitbox().intersects(player1.getHitbox())) {
+                    player1.setVivo(false);
+                }
+            }
+        }
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         //player1.move();
         //System.out.println(player1.getX() + " " + player1.getY());
         this.requestFocus();
-        repaint();  
+        repaint();
     }
 
-  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,7 +152,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-       
+
     }//GEN-LAST:event_formKeyPressed
 
     private class TAdapter extends KeyAdapter {
@@ -137,9 +161,9 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             player1.keyPressed(e);
         }
-        
+
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

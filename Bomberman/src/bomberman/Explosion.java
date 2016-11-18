@@ -62,6 +62,8 @@ public class Explosion {
         hitbox = new Rectangle(x, y, ii.getIconWidth(), ii.getIconHeight());
     }
     
-    
+    public Image getImage() {
+        return explosion;
+    }
     
 }

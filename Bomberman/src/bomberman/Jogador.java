@@ -27,7 +27,8 @@ public class Jogador {
     private int bombasEmCampo = 0;
     private ArrayList<Bomb> bombas;
     private Rectangle hitbox;
-    private int range = 3;
+    private int range = 2;
+    boolean vivo = true;
 
     public Jogador() {
         inicializarJogador();
@@ -77,6 +78,14 @@ public class Jogador {
 
     public Rectangle getHitbox() {
         return hitbox;
+    }
+
+    public boolean isVivo() {
+        return vivo;
+    }
+
+    public void setVivo(boolean vivo) {
+        this.vivo = vivo;
     }
 
     public void setHitbox(int p1, int p2, int largura, int altura) {
