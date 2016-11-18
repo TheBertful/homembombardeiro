@@ -11,11 +11,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.Image;
+import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -32,6 +34,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     private Timer timer;
     private final int DELAY = 1;
     private ArrayList<Explosion> explosoes = new ArrayList<Explosion>();
+    private ArrayList<Rectangle> paredes = new ArrayList<Rectangle>();
 
     public Mapa() {
         //initComponents();
@@ -53,6 +56,8 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
 
         timer = new Timer(DELAY, this);
         timer.start();
+        
+        //paredes.add(new Rectangle());
     }
 
     private void carregarMapa() {
