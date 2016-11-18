@@ -91,7 +91,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         //player1.move();
-        System.out.println(player1.getX() + " " + player1.getY());
+        //System.out.println(player1.getX() + " " + player1.getY());
         this.requestFocus();
         repaint();  
     }

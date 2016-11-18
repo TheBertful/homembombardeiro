@@ -83,19 +83,19 @@ public class Jogador {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
-           x = x-32;
+           if ((x-32) > 32) x = x-32;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
-            x = x+32;
+           if ((x+32) < 440) x = x+32;
         }
 
         if (key == KeyEvent.VK_UP) {
-            y = y-32;
+           if ((y-32) > 0) y = y-32;
         }
 
         if (key == KeyEvent.VK_DOWN) {
-            y = y+32;
+           if ((y+32) < 370) y = y+32;
         }
         
         if (key == KeyEvent.VK_SPACE) {

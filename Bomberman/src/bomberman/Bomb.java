@@ -19,7 +19,7 @@ public class Bomb {
     private String bombPath = "/Assets/bomb1.png";
     private int x;
     private int y;
-    private int pavio = 1500;
+    private int pavio = 100;
     private Rectangle hitbox;
     
     public Bomb(int x, int y) {
