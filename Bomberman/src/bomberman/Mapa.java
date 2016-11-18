@@ -81,6 +81,9 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
                 bomba.setPavio(bomba.getPavio() - 1);
                 if (bomba.getPavio() < 0) {
                     player1.getBombas().remove(i);
+                    for (int j = 0; j < player1.getRange(); j++) {
+                        
+                    }
                     player1.setBombasEmCampo(player1.getBombasEmCampo() - 1);
                 }
             }

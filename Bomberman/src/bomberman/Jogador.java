@@ -27,6 +27,7 @@ public class Jogador {
     private int bombasEmCampo = 0;
     private ArrayList<Bomb> bombas;
     private Rectangle hitbox;
+    private int range = 3;
 
     public Jogador() {
         inicializarJogador();
@@ -40,6 +41,10 @@ public class Jogador {
         bombas = new ArrayList<Bomb>();
         // a ideia aqui é fazer algum construtor que receba o numero do player, pra ter um sprite diferente
         // e s posição diferente pra cada um
+    }
+
+    public int getRange() {
+        return range;
     }
 
     public int getX() {
