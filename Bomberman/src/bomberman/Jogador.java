@@ -214,9 +214,11 @@ public class Jogador {
         }
 
         if (key == KeyEvent.VK_SPACE) {
-            if (bombasEmCampo < limiteBombas) {
-                bombas.add(new Bomb(x, y));
-                bombasEmCampo++;
+            if (vivo) {
+                if (bombasEmCampo < limiteBombas) {
+                    bombas.add(new Bomb(x, y));
+                    bombasEmCampo++;
+                }
             }
 
         }
