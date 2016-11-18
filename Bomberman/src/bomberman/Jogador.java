@@ -29,6 +29,7 @@ public class Jogador {
     private Rectangle hitbox;
     private int range = 2;
     boolean vivo = true;
+    private ArrayList<Rectangle> paredes = new ArrayList<Rectangle>();
 
     public Jogador() {
         inicializarJogador();
@@ -40,6 +41,13 @@ public class Jogador {
         x = 40;
         y = 30;
         bombas = new ArrayList<Bomb>();
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                paredes.add(new Rectangle(64 + i * 64, 60 + j * 64, 32, 32));
+            }
+        }
+
         // a ideia aqui é fazer algum construtor que receba o numero do player, pra ter um sprite diferente
         // e s posição diferente pra cada um
     }
@@ -98,20 +106,30 @@ public class Jogador {
 
         if (key == KeyEvent.VK_LEFT) {
             boolean intersects = false;
-            if ((x - 32) > 32) {          
+            if ((x - 32) > 32) {
                 if (!bombas.isEmpty()) {
                     for (int i = 0; i < bombas.size(); i++) {
                         Bomb bomba;
                         bomba = bombas.get(i);
-                        if (bomba.getHitbox().intersects(new Rectangle((x-32), y, 19, 26))) intersects = true;
+                        if (bomba.getHitbox().intersects(new Rectangle((x - 32), y, 19, 26))) {
+                            intersects = true;
+                        }
                     }
                 }
-                
+
+                if (!paredes.isEmpty()) {
+                    for (int i = 0; i < paredes.size(); i++) {
+                        if (paredes.get(i).intersects(new Rectangle((x - 32), y, 19, 26))) {
+                            intersects = true;
+                        }
+                    }
+                }
+
                 if (!intersects) {
                     x = x - 32;
-                }  
+                }
             }
-            
+
         }
 
         if (key == KeyEvent.VK_RIGHT) {
@@ -121,13 +139,23 @@ public class Jogador {
                     for (int i = 0; i < bombas.size(); i++) {
                         Bomb bomba;
                         bomba = bombas.get(i);
-                        if (bomba.getHitbox().intersects(new Rectangle((x+32), y, 19, 26))) intersects = true;
+                        if (bomba.getHitbox().intersects(new Rectangle((x + 32), y, 19, 26))) {
+                            intersects = true;
+                        }
                     }
                 }
-                
+
+                if (!paredes.isEmpty()) {
+                    for (int i = 0; i < paredes.size(); i++) {
+                        if (paredes.get(i).intersects(new Rectangle((x + 32), y, 19, 26))) {
+                            intersects = true;
+                        }
+                    }
+                }
+
                 if (!intersects) {
                     x = x + 32;
-                }  
+                }
             }
         }
 
@@ -138,30 +166,50 @@ public class Jogador {
                     for (int i = 0; i < bombas.size(); i++) {
                         Bomb bomba;
                         bomba = bombas.get(i);
-                        if (bomba.getHitbox().intersects(new Rectangle(x, (y-32), 19, 26))) intersects = true;
+                        if (bomba.getHitbox().intersects(new Rectangle(x, (y - 32), 19, 26))) {
+                            intersects = true;
+                        }
                     }
                 }
-                
+
+                if (!paredes.isEmpty()) {
+                    for (int i = 0; i < paredes.size(); i++) {
+                        if (paredes.get(i).intersects(new Rectangle(x, (y - 32), 19, 26))) {
+                            intersects = true;
+                        }
+                    }
+                }
+
                 if (!intersects) {
                     y = y - 32;
-                }  
+                }
             }
         }
 
         if (key == KeyEvent.VK_DOWN) {
             boolean intersects = false;
             if ((y + 32) < 370) {
-                       if (!bombas.isEmpty()) {
+                if (!bombas.isEmpty()) {
                     for (int i = 0; i < bombas.size(); i++) {
                         Bomb bomba;
                         bomba = bombas.get(i);
-                        if (bomba.getHitbox().intersects(new Rectangle(x, (y+32), 19, 26))) intersects = true;
+                        if (bomba.getHitbox().intersects(new Rectangle(x, (y + 32), 19, 26))) {
+                            intersects = true;
+                        }
                     }
                 }
-                
+
+                if (!paredes.isEmpty()) {
+                    for (int i = 0; i < paredes.size(); i++) {
+                        if (paredes.get(i).intersects(new Rectangle(x, (y + 32), 19, 26))) {
+                            intersects = true;
+                        }
+                    }
+                }
+
                 if (!intersects) {
                     y = y + 32;
-                }  
+                }
             }
         }
 

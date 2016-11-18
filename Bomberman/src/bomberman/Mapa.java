@@ -34,7 +34,6 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
     private Timer timer;
     private final int DELAY = 1;
     private ArrayList<Explosion> explosoes = new ArrayList<Explosion>();
-    private ArrayList<Rectangle> paredes = new ArrayList<Rectangle>();
 
     public Mapa() {
         //initComponents();
@@ -56,8 +55,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
 
         timer = new Timer(DELAY, this);
         timer.start();
-        
-        //paredes.add(new Rectangle());
+
     }
 
     private void carregarMapa() {
@@ -119,7 +117,7 @@ public class Mapa extends javax.swing.JPanel implements ActionListener {
         }
 
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 
